@@ -14,6 +14,8 @@ import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.common.ClientProxy;
 import slimeknights.tconstruct.shared.block.BlockClearStainedGlass;
 import slimeknights.tconstruct.shared.block.BlockClearStainedGlass.EnumGlassColor;
@@ -50,23 +52,16 @@ public class CommonsClientProxy extends ClientProxy {
 
     // stained glass
     blockColors.registerBlockColorHandler(
-        new IBlockColor() {
-          @Override
-          public int colorMultiplier(@Nonnull IBlockState state, IBlockAccess access, BlockPos pos, int tintIndex) {
-            EnumGlassColor type = state.getValue(BlockClearStainedGlass.COLOR);
-            return type.getColor();
-          }
+        (state, access, pos, tintIndex) -> {
+          EnumGlassColor type = state.getValue(BlockClearStainedGlass.COLOR);
+          return type.getColor();
         },
         blockClearStainedGlass);
 
     minecraft.getItemColors().registerItemColorHandler(
-        new IItemColor() {
-          @SuppressWarnings("deprecation")
-          @Override
-          public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
-            IBlockState iblockstate = ((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
-            return blockColors.colorMultiplier(iblockstate, null, null, tintIndex);
-          }
+        (stack, tintIndex) -> {
+          IBlockState iblockstate = ((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
+          return blockColors.colorMultiplier(iblockstate, null, null, tintIndex);
         },
         blockClearStainedGlass);
 

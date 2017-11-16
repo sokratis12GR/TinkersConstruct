@@ -49,30 +49,15 @@ public class GadgetClientProxy extends ClientProxy {
 
     // slime channels
     minecraft.getBlockColors().registerBlockColorHandler(
-        new IBlockColor() {
-          @Override
-          public int colorMultiplier(@Nonnull IBlockState state, IBlockAccess access, BlockPos pos, int tintIndex) {
-            return state.getValue(BlockSlimeChannel.TYPE).getColor();
-          }
-        },
+        (state, access, pos, tintIndex) -> state.getValue(BlockSlimeChannel.TYPE).getColor(),
         TinkerGadgets.slimeChannel);
 
     ItemColors colors = minecraft.getItemColors();
     colors.registerItemColorHandler(
-        new IItemColor() {
-          @Override
-          public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
-            return BlockSlime.SlimeType.fromMeta(stack.getItemDamage()).getColor();
-          }
-        },
+        (stack, tintIndex) -> BlockSlime.SlimeType.fromMeta(stack.getItemDamage()).getColor(),
         TinkerGadgets.slimeChannel);
     colors.registerItemColorHandler(
-        new IItemColor() {
-          @Override
-          public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
-            return TinkerGadgets.slimeBoots.getColor(stack);
-          }
-        },
+        (stack, tintIndex) -> TinkerGadgets.slimeBoots.getColor(stack),
         TinkerGadgets.slimeBoots);
 
 
