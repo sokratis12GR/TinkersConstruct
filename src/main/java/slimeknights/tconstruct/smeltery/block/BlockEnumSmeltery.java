@@ -38,7 +38,7 @@ public class BlockEnumSmeltery<T extends Enum<T> & EnumBlock.IEnumMeta & IString
 
   @Nonnull
   @Override
-  public TileEntity createTileEntity(@Nonnull World world,@Nonnull  IBlockState state) {
+  public TileEntity createTileEntity(@Nonnull World world, @Nonnull  IBlockState state) {
     return new TileSmelteryComponent();
   }
 
