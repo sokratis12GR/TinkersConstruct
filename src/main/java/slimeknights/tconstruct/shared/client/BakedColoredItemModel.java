@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -15,15 +14,13 @@ import net.minecraftforge.client.model.pipeline.LightUtil;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import slimeknights.mantle.client.model.BakedWrapper;
+import slimeknights.tconstruct.library.client.model.ModelHelper;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-
-import javax.annotation.Nonnull;
-
-import slimeknights.mantle.client.model.BakedWrapper;
-import slimeknights.tconstruct.library.client.model.ModelHelper;
 
 @SideOnly(Side.CLIENT)
 public class BakedColoredItemModel extends BakedWrapper {
@@ -40,7 +37,7 @@ public class BakedColoredItemModel extends BakedWrapper {
     boolean didColorQuads = false;
 
     for(int i = 0; i < MAX_SUPPORTED_TINT_INDEX; i++) {
-      int color = Minecraft.getMinecraft().getItemColors().getColorFromItemstack(itemStack, i);
+      int color = Minecraft.getMinecraft().getItemColors().colorMultiplier(itemStack, i);
       if(color == -1) {
         continue;
       }
