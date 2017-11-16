@@ -14,20 +14,24 @@ import javax.annotation.Nonnull;
 import slimeknights.mantle.block.BlockStairsBase;
 import slimeknights.tconstruct.smeltery.tileentity.TileSmelteryComponent;
 
-public class BlockSearedStairs extends BlockStairsBase implements ITileEntityProvider {
+public class BlockSearedStairs extends BlockStairsBase {
 
   private Block block;
 
   public BlockSearedStairs(IBlockState modelState) {
     super(modelState);
     this.block = modelState.getBlock();
-    this.isBlockContainer = true; // has TE
   }
 
   @Nonnull
   @Override
-  public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+  public TileEntity createTileEntity(@Nonnull World world, @Nonnull  IBlockState state) {
     return new TileSmelteryComponent();
+  }
+
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
   }
 
   /* Pass on the missing code for seared block TE stuff */
