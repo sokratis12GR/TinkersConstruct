@@ -42,7 +42,7 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.shared.block.BlockSlime;
 import slimeknights.tconstruct.shared.block.BlockSlime.SlimeType;
 
-public class BlockSlimeChannel extends EnumBlock<SlimeType> implements ITileEntityProvider {
+public class BlockSlimeChannel extends EnumBlock<SlimeType> {
 
   public static final PropertyDirection SIDE = PropertyDirection.create("side");
   public static final PropertyEnum<ChannelDirection> DIRECTION = PropertyEnum.create("direction", ChannelDirection.class);
@@ -62,7 +62,6 @@ public class BlockSlimeChannel extends EnumBlock<SlimeType> implements ITileEnti
     this.setSoundType(SoundType.SLIME);
 
     this.setCreativeTab(TinkerRegistry.tabGadgets);
-    this.isBlockContainer = true; // has TE
   }
 
   /* Block state */
@@ -74,10 +73,16 @@ public class BlockSlimeChannel extends EnumBlock<SlimeType> implements ITileEnti
   }
 
   // color and side data are stored on the tile entity, but are pulled into the blockstate upon loading the tile entity
-  @Nonnull
+
+  @Nullable
   @Override
-  public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+  public TileEntity createTileEntity(World world, IBlockState state) {
     return new TileSlimeChannel();
+  }
+
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
   }
 
   /**

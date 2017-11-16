@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.smeltery.block;
 
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -12,17 +11,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import javax.annotation.Nonnull;
-
 import slimeknights.mantle.block.EnumBlock;
 import slimeknights.mantle.multiblock.IMasterLogic;
 import slimeknights.mantle.multiblock.IServantLogic;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.smeltery.tileentity.TileSmelteryComponent;
 
-public class BlockEnumSmeltery<T extends Enum<T> & EnumBlock.IEnumMeta & IStringSerializable> extends EnumBlock<T>
-    implements ITileEntityProvider {
+import javax.annotation.Nonnull;
+
+public class BlockEnumSmeltery<T extends Enum<T> & EnumBlock.IEnumMeta & IStringSerializable> extends EnumBlock<T> {
 
   public BlockEnumSmeltery(PropertyEnum<T> prop, Class<T> clazz) {
     this(Material.ROCK, prop, clazz);
@@ -35,12 +32,16 @@ public class BlockEnumSmeltery<T extends Enum<T> & EnumBlock.IEnumMeta & IString
     this.setResistance(20F);
     this.setSoundType(SoundType.METAL);
     this.setCreativeTab(TinkerRegistry.tabSmeltery);
-    this.isBlockContainer = true; // has TE
+  }
+
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
   }
 
   @Nonnull
   @Override
-  public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+  public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
     return new TileSmelteryComponent();
   }
 

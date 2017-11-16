@@ -19,13 +19,11 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import java.util.Locale;
-
-import javax.annotation.Nonnull;
-
 import slimeknights.mantle.block.EnumBlock;
 import slimeknights.tconstruct.smeltery.tileentity.TileDrain;
+
+import javax.annotation.Nonnull;
+import java.util.Locale;
 
 public class BlockSmelteryIO extends BlockEnumSmeltery<BlockSmelteryIO.IOType> {
 
@@ -60,9 +58,14 @@ public class BlockSmelteryIO extends BlockEnumSmeltery<BlockSmelteryIO.IOType> {
     return state.getValue(prop).getMeta(); // no rotation in the dropped drain
   }
 
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
+  }
+
   @Nonnull
   @Override
-  public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+  public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
     return new TileDrain();
   }
 

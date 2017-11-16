@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.smeltery.block;
 
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -20,22 +19,19 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import slimeknights.mantle.block.EnumBlock;
 import slimeknights.tconstruct.library.smeltery.IFaucetDepth;
 import slimeknights.tconstruct.smeltery.tileentity.TileTank;
+
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 public class BlockTank extends BlockEnumSmeltery<BlockTank.TankType> implements IFaucetDepth {
 
@@ -48,9 +44,14 @@ public class BlockTank extends BlockEnumSmeltery<BlockTank.TankType> implements 
     setDefaultState(this.blockState.getBaseState().withProperty(KNOB, false));
   }
 
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
+  }
+
   @Nonnull
   @Override
-  public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+  public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
     return new TileTank();
   }
 

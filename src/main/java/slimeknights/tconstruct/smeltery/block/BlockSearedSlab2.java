@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.smeltery.block;
 
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -11,18 +10,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.Locale;
-
-import javax.annotation.Nonnull;
-
 import slimeknights.mantle.block.EnumBlock;
 import slimeknights.mantle.block.EnumBlockSlab;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.tileentity.TileSmelteryComponent;
 
-public class BlockSearedSlab2 extends EnumBlockSlab<BlockSearedSlab2.SearedType> implements ITileEntityProvider {
+import javax.annotation.Nonnull;
+import java.util.Locale;
+
+public class BlockSearedSlab2 extends EnumBlockSlab<BlockSearedSlab2.SearedType> {
 
   public final static PropertyEnum<SearedType> TYPE = PropertyEnum.create("type", SearedType.class);
 
@@ -32,7 +29,6 @@ public class BlockSearedSlab2 extends EnumBlockSlab<BlockSearedSlab2.SearedType>
     this.setHardness(3F);
     this.setResistance(20F);
     this.setSoundType(SoundType.METAL);
-    this.isBlockContainer = true; // has TE
   }
 
   @Override
@@ -45,9 +41,14 @@ public class BlockSearedSlab2 extends EnumBlockSlab<BlockSearedSlab2.SearedType>
   
   /* Multiblock stuff */
 
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
+  }
+
   @Nonnull
   @Override
-  public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+  public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
     return new TileSmelteryComponent();
   }
 
