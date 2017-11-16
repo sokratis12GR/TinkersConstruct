@@ -46,7 +46,7 @@ public class BlockSearedSlab2 extends EnumBlockSlab<BlockSearedSlab2.SearedType>
 
   @Nonnull
   @Override
-  public TileEntity createTileEntity(@Nonnull World world,@Nonnull  IBlockState state) {
+  public TileEntity createTileEntity(@Nonnull World world, @Nonnull  IBlockState state) {
     return new TileSmelteryComponent();
   }
 
