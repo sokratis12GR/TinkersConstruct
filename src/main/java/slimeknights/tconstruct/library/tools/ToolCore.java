@@ -169,11 +169,11 @@ public abstract class ToolCore extends TinkersItem implements IToolStationDispla
   }
 
   @Override
-  public float getStrVsBlock(ItemStack stack, IBlockState state) {
+  public float getDestroySpeed(ItemStack stack, IBlockState state) {
     if(isEffective(state) || ToolHelper.isToolEffective(stack, state)) {
       return ToolHelper.calcDigSpeed(stack, state);
     }
-    return super.getStrVsBlock(stack, state);
+    return super.getDestroySpeed(stack, state);
   }
 
   public boolean isEffective(IBlockState state) {

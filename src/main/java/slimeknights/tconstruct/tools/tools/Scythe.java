@@ -2,7 +2,6 @@ package slimeknights.tconstruct.tools.tools;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockReed;
@@ -27,24 +26,18 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.eventhandler.Event;
-
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import slimeknights.tconstruct.library.events.TinkerToolEvent;
-import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
-import slimeknights.tconstruct.library.materials.HandleMaterialStats;
-import slimeknights.tconstruct.library.materials.HeadMaterialStats;
-import slimeknights.tconstruct.library.materials.Material;
-import slimeknights.tconstruct.library.materials.MaterialTypes;
+import slimeknights.tconstruct.library.materials.*;
 import slimeknights.tconstruct.library.tinkering.Category;
 import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.library.tools.AoeToolCore;
 import slimeknights.tconstruct.library.tools.ToolNBT;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 import slimeknights.tconstruct.tools.TinkerTools;
+
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Random;
 
 public class Scythe extends AoeToolCore {
 
@@ -134,7 +127,7 @@ public class Scythe extends AoeToolCore {
     boolean hit = false;
     // we cache the cooldown here since it resets as soon as the first entity is hit
     for(Entity entity : getAoeEntities(player, target, event)) {
-      if(distance < 0 || entity.getDistanceToEntity(target) <= distance) {
+      if(distance < 0 || entity.getDistance(target) <= distance) {
         hit |= ToolHelper.attackEntity(stack, this, player, entity, null, false);
       }
     }
@@ -220,7 +213,7 @@ public class Scythe extends AoeToolCore {
 
     int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
     for(Entity entity : getAoeEntities(player, target, event)) {
-      if(distance < 0 || entity.getDistanceToEntity(target) <= distance) {
+      if(distance < 0 || entity.getDistance(target) <= distance) {
         shorn |= shearEntity(stack, player.getEntityWorld(), player, entity, fortune);
       }
     }

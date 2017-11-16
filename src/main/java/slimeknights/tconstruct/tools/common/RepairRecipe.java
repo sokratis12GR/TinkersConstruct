@@ -1,11 +1,6 @@
 package slimeknights.tconstruct.tools.common;
 
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-
 import com.google.common.collect.ImmutableSet;
-
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,6 +11,9 @@ import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.tinkering.TinkersItem;
 import slimeknights.tconstruct.tools.TinkerTools;
+
+import javax.annotation.Nonnull;
+import java.util.Set;
 
 public class RepairRecipe extends Impl<IRecipe> implements IRecipe {
 
@@ -100,7 +98,6 @@ public class RepairRecipe extends Impl<IRecipe> implements IRecipe {
     return width >= 3 && height >= 3;
   }
 
-  @Override
   public boolean isHidden() {
     return true;
   }

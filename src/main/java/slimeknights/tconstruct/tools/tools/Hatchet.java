@@ -1,7 +1,6 @@
 package slimeknights.tconstruct.tools.tools;
 
 import com.google.common.collect.ImmutableSet;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -12,9 +11,6 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.List;
-
 import slimeknights.tconstruct.library.client.particle.Particles;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tinkering.Category;
@@ -23,6 +19,8 @@ import slimeknights.tconstruct.library.tools.AoeToolCore;
 import slimeknights.tconstruct.library.tools.ToolNBT;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 import slimeknights.tconstruct.tools.TinkerTools;
+
+import java.util.List;
 
 public class Hatchet extends AoeToolCore {
 
@@ -70,11 +68,11 @@ public class Hatchet extends AoeToolCore {
 
   // hatches 1 : leaves 0
   @Override
-  public float getStrVsBlock(ItemStack stack, IBlockState state) {
+  public float getDestroySpeed(ItemStack stack, IBlockState state) {
     if(state.getBlock().getMaterial(state) == net.minecraft.block.material.Material.LEAVES) {
       return ToolHelper.calcDigSpeed(stack, state);
     }
-    return super.getStrVsBlock(stack, state);
+    return super.getDestroySpeed(stack, state);
   }
 
   @Override
