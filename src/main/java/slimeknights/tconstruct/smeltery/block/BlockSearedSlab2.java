@@ -22,7 +22,7 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.tileentity.TileSmelteryComponent;
 
-public class BlockSearedSlab2 extends EnumBlockSlab<BlockSearedSlab2.SearedType> implements ITileEntityProvider {
+public class BlockSearedSlab2 extends EnumBlockSlab<BlockSearedSlab2.SearedType> {
 
   public final static PropertyEnum<SearedType> TYPE = PropertyEnum.create("type", SearedType.class);
 
@@ -32,7 +32,6 @@ public class BlockSearedSlab2 extends EnumBlockSlab<BlockSearedSlab2.SearedType>
     this.setHardness(3F);
     this.setResistance(20F);
     this.setSoundType(SoundType.METAL);
-    this.isBlockContainer = true; // has TE
   }
 
   @Override
@@ -47,8 +46,13 @@ public class BlockSearedSlab2 extends EnumBlockSlab<BlockSearedSlab2.SearedType>
 
   @Nonnull
   @Override
-  public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+  public TileEntity createTileEntity(@Nonnull World world,@Nonnull  IBlockState state) {
     return new TileSmelteryComponent();
+  }
+
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
   }
 
   @Override
