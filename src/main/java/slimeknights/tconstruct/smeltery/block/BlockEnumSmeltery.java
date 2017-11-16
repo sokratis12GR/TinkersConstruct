@@ -21,8 +21,7 @@ import slimeknights.mantle.multiblock.IServantLogic;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.smeltery.tileentity.TileSmelteryComponent;
 
-public class BlockEnumSmeltery<T extends Enum<T> & EnumBlock.IEnumMeta & IStringSerializable> extends EnumBlock<T>
-    implements ITileEntityProvider {
+public class BlockEnumSmeltery<T extends Enum<T> & EnumBlock.IEnumMeta & IStringSerializable> extends EnumBlock<T> {
 
   public BlockEnumSmeltery(PropertyEnum<T> prop, Class<T> clazz) {
     this(Material.ROCK, prop, clazz);
@@ -37,11 +36,16 @@ public class BlockEnumSmeltery<T extends Enum<T> & EnumBlock.IEnumMeta & IString
     this.setCreativeTab(TinkerRegistry.tabSmeltery);
     this.isBlockContainer = true; // has TE
   }
-
-  @Nonnull
+  
+  @Nullable
   @Override
-  public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+  public TileEntity createTileEntity(@Nonnull World world,@Nonnull  IBlockState state) {
     return new TileSmelteryComponent();
+  }
+
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
   }
 
   /* BlockContainer TE handling */
